@@ -25,6 +25,8 @@ export default function SlideMenu({
 
   const handleSubmit = () => {
     onSubmit(title, text)
+    setTitle("")
+    setText("")
     onClose()
   }
 
