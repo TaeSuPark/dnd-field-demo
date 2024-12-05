@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { FixedButton, ZoomBoxContainer } from "./styled"
+import { useEffect, useState } from "react"
+import { ZoomBoxContainer } from "./styled"
 import React from "react"
 import DragCard from "../Cards/DragCard"
 import SlideMenu from "../SildeMenu/SlideMenu"
@@ -46,18 +46,36 @@ export default function ZoomBox({}: ZoomBoxProps) {
     }
 
     setCards((prevCards) => [...prevCards, newCard])
+    localStorage.setItem("cards", JSON.stringify([...cards, newCard]))
     setIsOpen(false)
   }
 
   const handleDeleteCard = (id: number) => {
     setCards((prevCards) => prevCards.filter((card) => card.id !== id))
+    localStorage.setItem(
+      "cards",
+      JSON.stringify(cards.filter((card) => card.id !== id))
+    )
   }
 
   const updateCardPosition = (id: number, x: number, y: number) => {
     setCards((prevCards) =>
       prevCards.map((card) => (card.id === id ? { ...card, x, y } : card))
     )
+    localStorage.setItem(
+      "cards",
+      JSON.stringify(
+        cards.map((card) => (card.id === id ? { ...card, x, y } : card))
+      )
+    )
   }
+
+  useEffect(() => {
+    const savedCards = localStorage.getItem("cards")
+    if (savedCards) {
+      setCards(JSON.parse(savedCards))
+    }
+  }, [cards])
 
   return (
     <VStack>
