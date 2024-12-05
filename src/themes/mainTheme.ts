@@ -21,7 +21,21 @@ const createVariants = (
   }
 }
 
-const colors = {}
+const colors = {
+  primary: "#FF6B6B",
+  secondary: "#FFE66D",
+  tertiary: "#88D8B0",
+  black: "#000000",
+  white: "#FFFFFF",
+  gray: "#F7F7F7",
+  lightGray: "#F0F0F0",
+  darkGray: "#BDBDBD",
+  error: "#FF6B6B",
+  warning: "#FFE66D",
+  success: "#88D8B0",
+  info: "#6D5DD3",
+  transparent: "transparent",
+}
 
 const spaces = {
   // 2간격
@@ -88,6 +102,7 @@ const variants = {
 
 export type VariantsType = keyof typeof variants
 export type SpacesType = keyof typeof spaces
+export type ColorsType = keyof typeof colors
 
 const mainTheme = {
   colors,
